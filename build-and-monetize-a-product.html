@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Zero to Revenue — How to Build & Monetize a Product</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --cream: #ede7d9;
+    --accent: #c8401a;
+    --accent-light: #f0ded8;
+    --muted: #7a7168;
+    --rule: #d4ccc0;
+    --col-width: 680px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 17px;
+    min-height: 100vh;
+  }
+
+  /* ── NEWSPAPER HEADER ── */
+  .masthead {
+    border-top: 5px solid var(--ink);
+    border-bottom: 3px double var(--ink);
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+    background: var(--paper);
+    position: relative;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .masthead-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+
+  .masthead-rule {
+    border: none;
+    border-top: 1px solid var(--ink);
+    margin: 1rem 0 0;
+  }
+
+  /* ── BYLINE ── */
+  .byline-bar {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.6rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .wrapper { grid-template-columns: 1fr; gap: 2rem; }
+    .sidebar { display: none; }
+  }
+
+  /* ── ARTICLE ── */
+  .article { max-width: var(--col-width); }
+
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 5.2rem;
+    font-weight: 900;
+    line-height: 0.78;
+    float: left;
+    margin-right: 0.12em;
+    margin-top: 0.06em;
+    color: var(--accent);
+  }
+
+  p { margin-bottom: 1.4rem; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 1.2rem;
+  }
+
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 2rem;
+  }
+
+  .section-label h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.3rem;
+    flex: 1;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-left: 5px solid var(--accent);
+    background: var(--accent-light);
+    margin: 2.5rem 0;
+    padding: 1.4rem 1.6rem;
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    border: 2px solid var(--ink);
+    padding: 1.4rem 1.6rem;
+    margin: 2rem 0;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.2rem 0.6rem;
+    position: absolute;
+    top: -1px;
+    left: 1.2rem;
+    transform: translateY(-50%);
+  }
+
+  .callout ul {
+    padding-left: 1.2rem;
+    margin: 0.4rem 0 0;
+  }
+
+  .callout ul li {
+    margin-bottom: 0.4rem;
+  }
+
+  .callout strong {
+    font-weight: 500;
+  }
+
+  /* ── STEP LIST ── */
+  .step-list { list-style: none; padding: 0; }
+  .step-list li {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .step-list li .step-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.15rem 0.45rem;
+    min-width: 2rem;
+    text-align: center;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 2.5rem 0;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── MONETIZE GRID ── */
+  .mono-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  @media (max-width: 580px) { .mono-grid { grid-template-columns: 1fr; } }
+
+  .mono-card {
+    border: 1.5px solid var(--ink);
+    padding: 1.1rem 1.2rem;
+    background: var(--paper);
+    transition: background 0.2s;
+  }
+
+  .mono-card:hover { background: var(--accent-light); }
+
+  .mono-card h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .mono-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 2rem;
+    border-left: 1px solid var(--rule);
+    padding-left: 2rem;
+  }
+
+  .sidebar-widget {
+    margin-bottom: 2.5rem;
+  }
+
+  .sidebar-widget h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .sidebar-widget p, .sidebar-widget li {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .sidebar-widget ul {
+    padding-left: 1rem;
+  }
+
+  .sidebar-widget ul li {
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 3px double var(--ink);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--cream);
+  }
+
+  strong { font-weight: 500; }
+
+  /* ── FADE IN ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .masthead, .byline-bar { animation: fadeUp 0.5s ease both; }
+  .article { animation: fadeUp 0.6s 0.1s ease both; }
+  .sidebar { animation: fadeUp 0.6s 0.2s ease both; }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <span>The Builder's Dispatch</span>
+    <span>Vol. I — Issue 01</span>
+    <span>May 10, 2026</span>
+  </div>
+  <h1>From Zero to<br><em>Revenue</em></h1>
+  <p class="masthead-sub">A complete guide to building and monetizing a product that people actually pay for</p>
+  <hr class="masthead-rule">
+</header>
+
+<div class="byline-bar">
+  <span>By The Editorial Team</span>
+  <span>&#9632; Entrepreneurship &nbsp;&#9632; Product &nbsp;&#9632; Growth</span>
+  <span>~12 min read</span>
+</div>
+
+<!-- MAIN -->
+<div class="wrapper">
+<article class="article">
+
+  <p class="drop-cap">Every successful product in history started as someone's stubborn belief that a problem was worth solving. Not a pitch deck. Not a logo. Not a perfectly polished app. Just a problem — and the resolve to fix it. Building and monetizing a product is less about invention and more about disciplined execution: finding real pain, building the minimum that addresses it, and then learning how to charge for it without apologizing.</p>
+
+  <p>This guide walks through the entire journey — from spotting an opportunity to turning it into sustainable revenue — with hard-won lessons at each step.</p>
+
+  <!-- 1 -->
+  <div class="section-label">
+    <span class="section-num">1</span>
+    <h2>Find a Problem Worth Solving</h2>
+  </div>
+
+  <p>The graveyard of failed products is not filled with bad technology. It's filled with solutions to problems nobody had. The first and most important job of any builder is to find a real, painful, recurring problem — ideally one you've experienced yourself.</p>
+
+  <p>The best product ideas come from observation: notice what people complain about, what they cobble together with spreadsheets and duct-tape workarounds, what they pay for with money or time but get no joy from. Those friction points are your raw material.</p>
+
+  <div class="callout">
+    <span class="callout-label">Validation Checklist</span>
+    <ul>
+      <li><strong>Is the problem frequent?</strong> Daily pain beats occasional inconvenience.</li>
+      <li><strong>Is someone already paying for a bad solution?</strong> Existing spend proves the market.</li>
+      <li><strong>Can you reach these people?</strong> A niche you can't find isn't a niche you can sell to.</li>
+      <li><strong>Would you build this even if it was hard?</strong> Motivation outlasts strategy.</li>
+    </ul>
+  </div>
+
+  <p>Talk to at least 20 potential users before writing a line of code. Listen for the stories, not the feature requests. When someone says "I just want a button that does X," what they're really telling you is "I keep doing X manually and it's killing me."</p>
+
+  <!-- 2 -->
+  <div class="section-label">
+    <span class="section-num">2</span>
+    <h2>Define Your Value Proposition</h2>
+  </div>
+
+  <p>A value proposition is a single, clear sentence that explains who you help, what you help them do, and why your solution is better than their current alternative. Most founders skip this step and pay for it later when their messaging confuses prospects and their team pulls in different directions.</p>
+
+  <div class="pull-quote">
+    <p>"Your value proposition isn't what your product does — it's the specific outcome your customer gets that they couldn't reliably get before."</p>
+  </div>
+
+  <p>The template is deceptively simple: <strong>"We help [specific person] achieve [specific outcome] without [specific friction]."</strong> Fill it in honestly. If you can't, your idea isn't specific enough yet.</p>
+
+  <!-- 3 -->
+  <div class="section-label">
+    <span class="section-num">3</span>
+    <h2>Build the Minimum Viable Product</h2>
+  </div>
+
+  <p>An MVP is not a half-built product. It's the smallest version of your solution that lets a real customer experience the core value and tell you whether it's worth more of your time and their money. The most common mistake builders make is confusing an MVP with version 1.0 — then spending six months polishing features before talking to a single paying customer.</p>
+
+  <ul class="step-list">
+    <li><span class="step-icon">01</span><div>List every feature you think the product needs. Then cut it in half. Then cut it in half again. What's left is probably your MVP.</div></li>
+    <li><span class="step-icon">02</span><div>Build the one workflow that delivers your core value proposition end-to-end — even if everything else is manual behind the scenes.</div></li>
+    <li><span class="step-icon">03</span><div>Get five people to use it in a session you observe. Not friends. Not family. Actual target users who feel the problem you're solving.</div></li>
+    <li><span class="step-icon">04</span><div>Measure the thing that matters: did the user succeed at the core task? Not "did they like it" — did it actually work?</div></li>
+    <li><span class="step-icon">05</span><div>Iterate one thing at a time. Build → measure → learn. Resist the urge to change five things between tests — you'll never know what moved the needle.</div></li>
+  </ul>
+
+  <div class="divider">✦ ✦ ✦</div>
+
+  <!-- 4 -->
+  <div class="section-label">
+    <span class="section-num">4</span>
+    <h2>Find Your Early Adopters</h2>
+  </div>
+
+  <p>Early adopters are not average users. They are the people who feel the problem so acutely that they're willing to use something imperfect in exchange for getting a solution today. They'll forgive rough edges, report bugs, and tell you exactly what's missing — if you treat them like partners, not users.</p>
+
+  <p>Find them where the problem lives: niche communities, subreddits, Slack groups, LinkedIn threads, industry conferences. Don't pitch — participate. Solve problems in public. Be genuinely useful. The people who notice and reach out are your early adopters.</p>
+
+  <div class="callout">
+    <span class="callout-label">Where to Find Early Adopters</span>
+    <ul>
+      <li>Reddit communities around the pain point</li>
+      <li>LinkedIn posts that describe the problem</li>
+      <li>Slack/Discord communities in your target industry</li>
+      <li>Your own professional network (don't underestimate this)</li>
+      <li>Competitor review sites like G2 or Capterra — read the "cons"</li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="section-label">
+    <span class="section-num">5</span>
+    <h2>Choose Your Monetization Model</h2>
+  </div>
+
+  <p>Monetization is not something you bolt on after product-market fit. The way you charge shapes your product, your incentives, and your relationship with customers. Choose a model that aligns your success with theirs.</p>
+
+  <div class="mono-grid">
+    <div class="mono-card">
+      <h4>SaaS Subscription</h4>
+      <p>Recurring monthly or annual fee. Predictable revenue, easy to model. Works best when value is ongoing and continuous.</p>
+    </div>
+    <div class="mono-card">
+      <h4>Usage-Based Pricing</h4>
+      <p>Customers pay for what they consume. Lowers the barrier to start and scales with their success. Risk: unpredictable revenue.</p>
+    </div>
+    <div class="mono-card">
+      <h4>Freemium</h4>
+      <p>Free tier drives adoption; paid tier unlocks more value. Requires a clear, compelling reason to upgrade. High volume needed.</p>
+    </div>
+    <div class="mono-card">
+      <h4>One-Time Purchase</h4>
+      <p>Simple and trusted. Works well for tools, templates, or software with no ongoing cost. Hard to build compounding revenue.</p>
+    </div>
+    <div class="mono-card">
+      <h4>Marketplace / Commission</h4>
+      <p>Take a cut of transactions you facilitate. Scales with usage. Requires building both supply and demand simultaneously.</p>
+    </div>
+    <div class="mono-card">
+      <h4>Services + Product</h4>
+      <p>Lead with services to fund product development. Risk: services revenue can crowd out product focus. Good for B2B.</p>
+    </div>
+  </div>
+
+  <p>The right model depends on your customer type, deal size, and competitive context. Charge early — even a small amount. Customers who pay are fundamentally different (more committed, more honest) than those who use for free.</p>
+
+  <!-- 6 -->
+  <div class="section-label">
+    <span class="section-num">6</span>
+    <h2>Price With Confidence</h2>
+  </div>
+
+  <p>Most first-time founders underprice dramatically. They think about their costs and add a margin, rather than thinking about the value they deliver to the customer. If your product saves someone ten hours a week and their time is worth $100/hour, the value is $1,000/month — not $29.</p>
+
+  <div class="pull-quote">
+    <p>"If no one is pushing back on your price, you're almost certainly charging too little. Some resistance is a sign you're in the right territory."</p>
+  </div>
+
+  <p>Raise prices before you think you're ready. The discomfort is data. And if you have more demand than you can handle at your current price, that's the market telling you something important.</p>
+
+  <!-- 7 -->
+  <div class="section-label">
+    <span class="section-num">7</span>
+    <h2>Build a Repeatable Growth Engine</h2>
+  </div>
+
+  <p>Early customers come from hustle: direct outreach, personal networks, posting relentlessly online. That's fine for the first ten. But you can't manually acquire customer number ten thousand. At some point you need a system — a repeatable process that brings in qualified leads without you personally initiating every conversation.</p>
+
+  <ul class="step-list">
+    <li><span class="step-icon">▸</span><div><strong>Content & SEO:</strong> Publish deeply useful content around the problem you solve. Organic search compounds over time and builds trust before a customer ever contacts you.</div></li>
+    <li><span class="step-icon">▸</span><div><strong>Word of mouth:</strong> Build the product so well that users tell others. Referral loops are the most capital-efficient growth channel that exists.</div></li>
+    <li><span class="step-icon">▸</span><div><strong>Community:</strong> Build or participate in a community around the pain point. Community creates retention and leads simultaneously.</div></li>
+    <li><span class="step-icon">▸</span><div><strong>Partnerships:</strong> Find adjacent products serving the same customer and create integrations or co-marketing arrangements.</div></li>
+    <li><span class="step-icon">▸</span><div><strong>Paid acquisition:</strong> Once you know your customer acquisition cost and lifetime value ratio, paid channels can pour fuel on existing traction. Not before.</div></li>
+  </ul>
+
+  <!-- 8 -->
+  <div class="section-label">
+    <span class="section-num">8</span>
+    <h2>Retain, Expand, and Compound</h2>
+  </div>
+
+  <p>Acquiring a customer is only the beginning. The real work — and the real economics — is in keeping them and growing their value over time. Churn is the silent killer of otherwise promising products; a business that loses 10% of its customers every month will never grow past a certain ceiling no matter how good the top-of-funnel is.</p>
+
+  <p>Retention starts at onboarding. Get new customers to their first meaningful success moment as fast as possible. That moment — sometimes called the "aha moment" — is when they go from a trialist to a believer. Every day it takes to reach that moment is a day they're at risk of churning.</p>
+
+  <div class="callout">
+    <span class="callout-label">The Retention Playbook</span>
+    <ul>
+      <li><strong>Reduce time-to-value:</strong> Shorter onboarding, better templates, guided setup.</li>
+      <li><strong>Create habit loops:</strong> Give users a reason to return daily or weekly.</li>
+      <li><strong>Monitor usage signals:</strong> Customers who stop using often churn before they cancel.</li>
+      <li><strong>Expand revenue:</strong> Add tiers, seats, add-ons. It's easier to sell more to happy customers than to acquire new ones.</li>
+      <li><strong>Build relationships:</strong> Know your top customers by name. They'll tell you what's next.</li>
+    </ul>
+  </div>
+
+  <!-- 9 -->
+  <div class="section-label">
+    <span class="section-num">9</span>
+    <h2>The Metrics That Actually Matter</h2>
+  </div>
+
+  <p>Vanity metrics — page views, registered users, downloads — feel good and mean almost nothing. The metrics that matter are the ones tied to the health of your business model and the experience of your customers.</p>
+
+  <ul class="step-list">
+    <li><span class="step-icon">MRR</span><div><strong>Monthly Recurring Revenue:</strong> The pulse of a subscription business. Track new, expansion, contraction, and churned MRR separately.</div></li>
+    <li><span class="step-icon">LTV</span><div><strong>Lifetime Value:</strong> The total revenue you can expect from a customer over their relationship with you. Higher LTV unlocks more acquisition spend.</div></li>
+    <li><span class="step-icon">CAC</span><div><strong>Customer Acquisition Cost:</strong> The full cost to acquire one customer. Healthy businesses have LTV:CAC ratios above 3:1.</div></li>
+    <li><span class="step-icon">NRR</span><div><strong>Net Revenue Retention:</strong> If existing customers grow their spend faster than others churn, NRR exceeds 100% — and the business grows even without new customers.</div></li>
+    <li><span class="step-icon">NPS</span><div><strong>Net Promoter Score:</strong> A proxy for word-of-mouth potential. Low NPS is a leading indicator of churn before the data shows it.</div></li>
+  </ul>
+
+  <div class="divider">✦ ✦ ✦</div>
+
+  <!-- CONCLUSION -->
+  <div class="section-label">
+    <span class="section-num">✦</span>
+    <h2>The Only Rule That Doesn't Change</h2>
+  </div>
+
+  <p>Every tactical recommendation in this guide will eventually become obsolete. Distribution channels shift, pricing norms evolve, product categories get commoditized. But one principle has held across every era of building: <strong>the builders who win are the ones who stay closest to the customer the longest.</strong></p>
+
+  <p>Talk to your users every week. Watch them use your product. Listen to why they cancel. Celebrate when they expand. The most sophisticated growth strategy in the world can't compensate for a product that people don't genuinely love — and there's no shortcut to discovering what that looks like except doing the work, iterating fast, and staying honest about what the data is telling you.</p>
+
+  <p>Now go build something.</p>
+
+</article>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-widget">
+    <h3>By the Numbers</h3>
+    <div style="margin-bottom:1.2rem;">
+      <div class="stat-big">42%</div>
+      <div class="stat-label">of startups fail due to no market need</div>
+    </div>
+    <div style="margin-bottom:1.2rem;">
+      <div class="stat-big">3×</div>
+      <div class="stat-label">Healthy LTV to CAC ratio minimum</div>
+    </div>
+    <div>
+      <div class="stat-big">20</div>
+      <div class="stat-label">Customer interviews before building</div>
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+    <h3>Key Terms</h3>
+    <ul>
+      <li><strong>MVP</strong> — Minimum Viable Product</li>
+      <li><strong>PMF</strong> — Product-Market Fit</li>
+      <li><strong>MRR</strong> — Monthly Recurring Revenue</li>
+      <li><strong>Churn</strong> — Rate of customer cancellation</li>
+      <li><strong>NRR</strong> — Net Revenue Retention</li>
+      <li><strong>CAC</strong> — Customer Acquisition Cost</li>
+      <li><strong>LTV</strong> — Customer Lifetime Value</li>
+    </ul>
+  </div>
+
+  <div class="sidebar-widget">
+    <h3>Quick Checklist</h3>
+    <ul>
+      <li>✓ Defined target customer</li>
+      <li>✓ Validated the problem</li>
+      <li>✓ Wrote a value proposition</li>
+      <li>✓ Built & tested MVP</li>
+      <li>✓ Charging real money</li>
+      <li>✓ Tracking retention</li>
+      <li>✓ Talking to users weekly</li>
+    </ul>
+  </div>
+
+  <div class="sidebar-widget">
+    <h3>Recommended Reading</h3>
+    <ul>
+      <li>The Mom Test — Rob Fitzpatrick</li>
+      <li>Zero to One — Peter Thiel</li>
+      <li>Obviously Awesome — April Dunford</li>
+      <li>The Lean Startup — Eric Ries</li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<footer>
+  &copy; 2026 The Builder's Dispatch &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; Build something people love
+</footer>
+
+</body>
+</html>
